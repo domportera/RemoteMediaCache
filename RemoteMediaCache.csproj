@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="domportera.CLIAlly" Version="0.1.1-alpha" />
+      <PackageReference Include="domportera.CLIAlly" Version="0.1.6-alpha" />
       <PackageReference Include="domportera.NetJsonAOT" Version="0.1.3-alpha" />
     </ItemGroup>
 

@@ -5,10 +5,10 @@ namespace RemoteMediaCache;
 
 public class PseudoCacher
 {
-    
     [Command(NameCaseSensitive = false)]
-    private void PseudoCache(PseudoCacheArgs args)
+    private static void PseudoCache(PseudoCacheArgs args)
     {
+        Console.Write("Running PseudoCache command...");
         var filePath = args.Path;
 
         if (!args.CacheNonNetworkPaths && !Utility.IsNetworkPath(filePath))
@@ -79,5 +79,5 @@ public class PseudoCacher
     }
 
     private const int BufferLength = 1024 * 1024 * 64; // 64mb chunks
-    private readonly byte[] _throwawayBuffer = new byte[BufferLength];
+    private static readonly byte[] _throwawayBuffer = new byte[BufferLength];
 }

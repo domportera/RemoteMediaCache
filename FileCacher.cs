@@ -7,6 +7,7 @@ internal sealed class FileCacher
     [Command(IsDefaultCommand = true)]
     private static ExitCodeInfo Cache(CacheArgs args)
     {
+        Console.WriteLine("Running Cache command.");
         var remotePath = args.Path;
 
         var hasForwardToCommand = !string.IsNullOrWhiteSpace(args.ForwardToCommand);
@@ -129,7 +130,7 @@ internal sealed class FileCacher
         }
         
         var fileLimitBytes = preferences.MaxCacheSizeMB * 1024 * 1024;
-        while (fileLimitBytes > totalCountBytes)
+        while (fileLimitBytes > totalCountBytes && allFiles.Count > 1)
         {
             var mostStaleFile = allFiles[^1];
             totalCountBytes -= mostStaleFile.Length;
@@ -138,7 +139,7 @@ internal sealed class FileCacher
 
         if (!string.IsNullOrWhiteSpace(args.ForwardToCommand))
         {
-            return CommandRunner.Run(args.ForwardToCommand, args.ForwardToCommandArguments, remotePath);
+            return CommandRunner.Run(args.ForwardToCommand, args.ForwardToCommandArguments, localFilePath);
         }
 
         return ExitCodeInfo.FromSuccess("Successfully preloaded file.");
